@@ -45,5 +45,5 @@ class WebScraper:
             time.sleep(60)
 
 if __name__ == "__main__":
-    scraper = WebScraper('https://supremecourt.gov.np/web/', 'scraped_data_nepali.json')
+    scraper = WebScraper('https://supremecourt.gov.np/web/', 'case_state_today.json')
     scraper.run()
