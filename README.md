@@ -1,4 +1,4 @@
-# Supreme Court Case Scraper
+# Court Case Scraper
 
 ## Project Overview
 
