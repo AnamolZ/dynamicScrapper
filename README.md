@@ -2,83 +2,20 @@
 
 ## Project Overview
 
-This project automates the process of scraping case-related information from the official Supreme Court of Nepal website. It is divided into two tasks:
-1. **Today's Case State Scraping**: Extracts the *मुद्दाको प्रक्रियागत विवरण* at specific times daily.
-2. **Procedural Case Detail Scraping**: Scrapes detailed information about individual cases using case registration numbers.
+The **Court Case Scraper** is an automated tool designed to extract case-related information from the official website of the Supreme Court of Nepal. The project is composed of two main tasks: the first involves extracting procedural case data at scheduled intervals, and the second focuses on scraping detailed case information using registration numbers. These tasks automate the data extraction process, storing the results in a structured JSON format for easy access and further analysis.
 
-Both tasks aim to automate the extraction and storage of data in JSON format.
+The scraper is configured to run at fixed times daily, specifically at **10:30 AM** and **5:30 PM**, to extract procedural case data. This data is saved in a JSON file named `case_state_today.json`. In addition to procedural case data, the scraper also fetches detailed information by sending POST requests with case registration numbers. The detailed case data is stored in a separate JSON file, `procedural_case_detail.json`.
 
----
+## Key Features
 
-### Task 1: Today's Case State Scraper
+The scraper operates on an automated schedule, ensuring that data is collected consistently twice a day at the designated times. Multithreading is used to efficiently process multiple cases simultaneously, significantly speeding up the scraping process. All the data extracted is saved in a clean, structured JSON format, making it easy to integrate into other systems or perform additional analysis.
 
-**Objective**: Scrape the case details daily at **10:30 AM** and **5:30 PM** from the Supreme Court's website and store the information in a JSON file named `case_state_today.json`.
+## Running the Scraper
 
-- **Scraping logic**:
-  - Fetches the webpage data.
-  - Parses case state data using BeautifulSoup.
-  - Saves the parsed information in a structured JSON format.
+To run the scraper, first prepare a JSON file named `reg_number.json`, which should contain the registration numbers of the cases you wish to scrape. Once the file is ready, execute the following command to initiate the scraper:
 
-### Task 2: Procedural Case Detail Scraper
+```bash
+python case_detail_scraper.py
+```
 
-**Objective**: Fetch detailed information for each case using case registration numbers via a POST request and save the result in `procedural_case_detail.json`.
-
-- **Scraping logic**:
-  - Sends a POST request with case numbers.
-  - Scrapes detailed case information, including registration details, issue specifics, hearing records, and more.
-  - Executes scraping tasks concurrently using multithreading for faster performance.
-
----
-
-### Installation and Setup
-
-1. **Clone the repository**:
-   ```bash
-   git clone <repository-url>
-   cd <repository-directory>
-   ```
-
-2. **Create a virtual environment**:
-   ```bash
-   python -m venv venv
-   venv/bin/activate
-   ```
-
-3. **Install dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
----
-
-### Usage Instructions
-
-#### Running Today's Case State Scraper:
-
-1. **Navigate to the project directory**.
-2. **Run the scraper**:
-   ```bash
-   python case_state_scrapper.py
-   ```
-
-The program will automatically scrape the data twice a day (at 10:30 AM and 5:30 PM) and save the result in `case_state_today.json`.
-
-#### Running Procedural Case Detail Scraper:
-
-1. Ensure you have a JSON file named `reg_number.json` containing the registration numbers you wish to scrape.
-2. **Run the scraper**:
-   ```bash
-   python case_detail_scrapper.py
-   ```
-
-This will initiate scraping for all the registration numbers provided, and the detailed case data will be saved in `procedural_case_detail.json`.
-
----
-
-### Key Features
-
-- **Automated Scheduling**: Scrapes data at predefined intervals.
-- **Concurrent Processing**: Uses multithreading to handle multiple case numbers, significantly improving scraping speed.
-- **JSON Storage**: Data is neatly structured and saved in JSON format, ready for API integration or further processing.
-
----
+The scraper will fetch the relevant case details and store them in the `procedural_case_detail.json` file for further use.
